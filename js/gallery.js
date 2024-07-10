@@ -66,21 +66,19 @@ const images = [
 
 const gallery = document.querySelector('ul.gallery');
 
+let galleryHTML = '';
+
 images.forEach(image => {
-  const galleryItem = document.createElement('li');
-  galleryItem.classList.add('gallery-item');
-
-  const link = document.createElement('a');
-  link.classList.add('gallery-link');
-  link.href = image.largeImage;
-
-  const img = document.createElement('img');
-  img.classList.add('gallery-image');
-  img.src = image.smallImage;
-  img.setAttribute('data-source', image.largeImage);
-  img.alt = image.description;
-
-  link.appendChild(img);
-  galleryItem.appendChild(link);
-  gallery.appendChild(galleryItem);
+  galleryHTML += `
+    <li class="gallery-item">
+      <a class="gallery-link" href="${image.originalImage}" onclick="event.preventDefault()">
+        <img
+          class="gallery-image"
+          src="${image.previewImage}"
+          data-source="${image.originalImage}"
+          alt="${image.description}"
+        />
+      </a>
+    </li>
+  `;
 });
